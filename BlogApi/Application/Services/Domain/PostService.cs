@@ -11,5 +11,7 @@ namespace SmallBlog.Application.Services.Domain
         {
             _unitOfWork = unitOfWork;
         }
+
+
     }
 }

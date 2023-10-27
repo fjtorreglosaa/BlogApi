@@ -108,7 +108,7 @@ namespace SmallBlog.Application.Services.Domain
 
             var entity = validationResult.Blog;
 
-            entity.Title = criteria.BlogName;
+            entity.Title = criteria.Title;
             entity.Description = criteria.Description;
 
             _unitOfWork.Commit();

@@ -50,17 +50,17 @@ namespace BlogApi.Application.Services.Validation
                 });
             }
 
-            var blogName = await _unitOfWork.Blogs.GetAll().Where(x => x.Title == criteria.BlogName).ToListAsync();
+            var blogName = await _unitOfWork.Blogs.GetAll().Where(x => x.Title == criteria.Title).ToListAsync();
 
             if (blogName.Any())
             {
                 validationResult.Conditions.Add(new ValidationConditionDTO
                 {
-                    ErrorMessage = $"There is a blog with the provided title {criteria.BlogName}",
+                    ErrorMessage = $"There is a blog with the provided title {criteria.Title}",
                     Severity = (int)HttpStatusCode.BadRequest
                 });
             }
-            if (string.IsNullOrEmpty(criteria.BlogName))
+            if (string.IsNullOrEmpty(criteria.Title))
             {
                 validationResult.Conditions.Add(new ValidationConditionDTO
                 {
