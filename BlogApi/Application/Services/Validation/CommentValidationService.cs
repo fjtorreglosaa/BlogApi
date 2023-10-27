@@ -35,7 +35,7 @@ namespace BlogApi.Application.Services.Validation
             return (validationResult, comment);
         }
 
-        public async Task<(ValidationResultDTO Validation, Comment Post)> ValidateForUpdate(Guid id, UpdateCommentDTO criteria)
+        public async Task<(ValidationResultDTO Validation, Comment Comment)> ValidateForUpdate(Guid id, UpdateCommentDTO criteria)
         {
             var validationResult = new ValidationResultDTO();
 

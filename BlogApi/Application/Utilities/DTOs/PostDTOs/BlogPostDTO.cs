@@ -6,6 +6,6 @@ namespace BlogApi.Application.Utilities.DTOs.PostDTOs
     {
         public string Title { get; set; }
         public string Content { get; set; }
-        public ICollection<PostCommentDTO> Comments { get; set; } = new List<PostCommentDTO>();
+        public ICollection<CommentDTO> Comments { get; set; } = new List<CommentDTO>();
     }
 }

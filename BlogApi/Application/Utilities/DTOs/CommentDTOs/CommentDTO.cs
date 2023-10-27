@@ -2,9 +2,10 @@
 
 namespace BlogApi.Application.Utilities.DTOs.CommentDTOs
 {
-    public class PostCommentDTO
+    public class CommentDTO
     {
-        public Guid AuthorId { get; set; }
+        public Guid UserId { get; set; }
+        public Guid PostId { get; set; }
         public string Content { get; set; }
         public bool Edited { get; set; }
         public DateTime? LastModificated { get; set; }
