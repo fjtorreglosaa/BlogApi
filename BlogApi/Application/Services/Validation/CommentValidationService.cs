@@ -1,6 +1,5 @@
 ﻿using BlogApi.Application.Services.Validation.Contracts;
 using BlogApi.Application.Utilities.DTOs.CommentDTOs;
-using BlogApi.Application.Utilities.DTOs.PostDTOs;
 using BlogApi.Application.Utilities.DTOs.ValidationDTOs;
 using BlogApi.Domain.Models;
 using BlogApi.Persistence.UnitOfWork.Contracts;
