@@ -23,7 +23,8 @@ namespace BlogApi.Application.Services.Auth
         {
             var claims = new List<Claim>
             {
-                new Claim("email", credentials.Email)
+                new Claim("email", credentials.Email),
+                new Claim("username", credentials.Username)
             };
 
             var user = await _userManager.FindByEmailAsync(credentials.Email);

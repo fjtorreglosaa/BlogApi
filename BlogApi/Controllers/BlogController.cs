@@ -43,11 +43,10 @@ namespace BlogApi.Controllers
         {
             var emailClaim = HttpContext.User.Claims.Where(claim => claim.Type == "email").FirstOrDefault();
             var email = emailClaim.Value;
-
             var user = await _userManager.FindByEmailAsync(email);
             var userId = user.Id;
-            var normalizedUserId = Guid.Parse(userId);
-            var result = await _blogService.CreateBlog(normalizedUserId, data);
+            var username = user.UserName;
+            var result = await _blogService.CreateBlog(userId, username, data);
 
             if (result.Validation.Conditions.Any())
             {

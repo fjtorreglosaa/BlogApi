@@ -25,7 +25,7 @@ namespace BlogApi.Controllers
         {
             var user = new IdentityUser
             {
-                UserName = credentials.Email,
+                UserName = credentials.Username,
                 Email = credentials.Email
             };
 

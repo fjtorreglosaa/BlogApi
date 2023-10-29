@@ -14,7 +14,7 @@ namespace BlogApi.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<IReadOnlyList<Blog>> GetBlogsByUserId(Guid userId)
+        public async Task<IReadOnlyList<Blog>> GetBlogsByUserId(string userId)
         {
             var blogs = await _context.Blogs.Where(x => x.AuthorId == userId).ToListAsync();
 

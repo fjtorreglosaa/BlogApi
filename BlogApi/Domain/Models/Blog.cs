@@ -9,7 +9,8 @@ namespace BlogApi.Domain.Models
             Posts = new HashSet<Post>();
         }
 
-        public Guid AuthorId { get; set; }
+        public string AuthorId { get; set; }
+        public string AuthorName { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public ICollection<Post> Posts { get; set; }

@@ -4,6 +4,6 @@ namespace BlogApi.Persistence.Repositories.Contracts
 {
     public interface IBlogRepository : IGenericRepository<Blog>
     {
-        Task<IReadOnlyList<Blog>> GetBlogsByUserId(Guid userId);
+        Task<IReadOnlyList<Blog>> GetBlogsByUserId(string userId);
     }
 }
