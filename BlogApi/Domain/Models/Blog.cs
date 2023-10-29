@@ -1,4 +1,6 @@
-﻿namespace BlogApi.Domain.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace BlogApi.Domain.Models
 {
     public class Blog : Model
     {
@@ -11,5 +13,6 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public ICollection<Post> Posts { get; set; }
+        public IdentityUser Author { get; set; }
     }
 }

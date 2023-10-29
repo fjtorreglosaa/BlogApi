@@ -17,7 +17,7 @@ namespace BlogApi.Application.Services.Validation
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<(ValidationResultDTO Validation, Post Blog)> ValidateForDelete(Guid id)
+        public async Task<(ValidationResultDTO Validation, Post Post)> ValidateForDelete(Guid id)
         {
             var validationResult = new ValidationResultDTO();
 

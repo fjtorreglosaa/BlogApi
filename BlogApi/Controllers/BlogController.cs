@@ -1,21 +1,28 @@
 ﻿using BlogApi.Application.Services.Domain.Contracts;
 using BlogApi.Application.Utilities.DTOs.BlogDTOs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class BlogController : ControllerBase
     {
         private readonly IBlogService _blogService;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public BlogController(IBlogService blogService)
+        public BlogController(IBlogService blogService, UserManager<IdentityUser> userManager)
         {
             _blogService = blogService;
+            _userManager = userManager;
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAllBlogs()
         {
             var result = await _blogService.GetAllBlogsAsync();
@@ -34,7 +41,13 @@ namespace BlogApi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateBlog([FromBody] CreateBlogDTO data)
         {
-            var result = await _blogService.CreateBlog(data);
+            var emailClaim = HttpContext.User.Claims.Where(claim => claim.Type == "email").FirstOrDefault();
+            var email = emailClaim.Value;
+
+            var user = await _userManager.FindByEmailAsync(email);
+            var userId = user.Id;
+            var normalizedUserId = Guid.Parse(userId);
+            var result = await _blogService.CreateBlog(normalizedUserId, data);
 
             if (result.Validation.Conditions.Any())
             {

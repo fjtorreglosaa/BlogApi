@@ -8,6 +8,6 @@ namespace BlogApi.Application.Utilities.DTOs.BlogDTOs
         public Guid AuthorId { get; set; }
         public string BlogName { get; set; }
         public string Description { get; set; }
-        public ICollection<BlogPostDTO> Posts { get; set; } = new List<BlogPostDTO>();
+        public ICollection<PostDTO> Posts { get; set; } = new List<PostDTO>();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BlogApi.Application.Utilities.DTOs.BlogDTOs;
 using BlogApi.Application.Utilities.DTOs.CommentDTOs;
+using BlogApi.Application.Utilities.DTOs.PostDTOs;
 using BlogApi.Domain.Models;
 
 namespace BlogApi.Application.Utilities
@@ -14,6 +15,9 @@ namespace BlogApi.Application.Utilities
                 .ReverseMap();
 
             CreateMap<Comment, CommentDTO>()
+                .ReverseMap();
+
+            CreateMap<Post, PostDTO>()
                 .ReverseMap();
         }
     }

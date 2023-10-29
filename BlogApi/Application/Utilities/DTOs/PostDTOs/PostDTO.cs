@@ -2,7 +2,7 @@
 
 namespace BlogApi.Application.Utilities.DTOs.PostDTOs
 {
-    public class BlogPostDTO
+    public class PostDTO
     {
         public string Title { get; set; }
         public string Content { get; set; }

@@ -24,14 +24,14 @@ namespace SmallBlog.Application.Services.Domain
             _logger = logger;
         }
 
-        public async Task<(ValidationResultDTO Validation, bool Commited)> CreateBlog(CreateBlogDTO criteria)
+        public async Task<(ValidationResultDTO Validation, bool Commited)> CreateBlog(Guid userId, CreateBlogDTO criteria)
         {
             var validation = await _blogValidationService.ValidateForCreate(criteria);
 
             var entity = new Blog
             {
                 Id = new Guid(),
-                AuthorId = criteria.AuthorId,
+                AuthorId = userId,
                 Title = criteria.BlogName,
                 Description = criteria.Description
             };
@@ -114,6 +114,15 @@ namespace SmallBlog.Application.Services.Domain
             _unitOfWork.Commit();
 
             return (validationResult.Validation, true);
+        }
+
+        public async Task<IReadOnlyList<BlogDTO>> GetBlogsByUserId(Guid userId)
+        {
+            var data = await _unitOfWork.Blogs.GetBlogsByUserId(userId);
+
+            var entity = _mapper.Map<List<BlogDTO>>(data);
+
+            return entity;
         }
     }
 }

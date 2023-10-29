@@ -94,14 +94,6 @@ namespace BlogApi.Application.Services.Validation
                     Severity = (int)HttpStatusCode.BadRequest
                 });
             }
-            if (criteria.AuthorId == null)
-            {
-                validationResult.Conditions.Add(new ValidationConditionDTO
-                {
-                    ErrorMessage = "The authorid field is required",
-                    Severity = (int)HttpStatusCode.BadRequest
-                });
-            }
             if (string.IsNullOrEmpty(criteria.BlogName))
             {
                 validationResult.Conditions.Add(new ValidationConditionDTO

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogApi.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20231025210835_InitialModel")]
+    [Migration("20231029012410_InitialModel")]
     partial class InitialModel
     {
         /// <inheritdoc />
@@ -34,6 +34,9 @@ namespace BlogApi.Migrations
                     b.Property<Guid>("AuthorId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("AuthorId1")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -43,6 +46,8 @@ namespace BlogApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId1");
 
                     b.ToTable("Blogs");
                 });
@@ -73,7 +78,7 @@ namespace BlogApi.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.ToTable("Commenets");
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("BlogApi.Domain.Models.Post", b =>
@@ -299,6 +304,15 @@ namespace BlogApi.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("BlogApi.Domain.Models.Blog", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId1");
+
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("BlogApi.Domain.Models.Comment", b =>

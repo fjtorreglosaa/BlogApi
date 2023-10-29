@@ -23,6 +23,7 @@ namespace SmallBlog.Application.Services.Domain
             _mapper = mapper;
             _logger = logger;
         }
+
         public async Task<(ValidationResultDTO Validation, bool Commited)> CreateComment(CreateCommentDTO criteria)
         {
             var validation = await _commentValidationService.ValidateForCreate(criteria);
@@ -74,7 +75,7 @@ namespace SmallBlog.Application.Services.Domain
             return (validationResult.Validation, true);
         }
 
-        public async Task<IReadOnlyList<CommentDTO>> GetAllBlogsAsync()
+        public async Task<IReadOnlyList<CommentDTO>> GetAllCommentsAsync()
         {
             var data = await _unitOfWork.Comments.GetAllAsync();
 
@@ -83,7 +84,7 @@ namespace SmallBlog.Application.Services.Domain
             return entity;
         }
 
-        public async Task<CommentDTO> GetBlogByIdAsync(Guid commentId)
+        public async Task<CommentDTO> GetCommentsByIdAsync(Guid commentId)
         {
             var entity = await _unitOfWork.Comments.GetAll().Where(x => x.Id == commentId).FirstOrDefaultAsync();
 
@@ -92,7 +93,7 @@ namespace SmallBlog.Application.Services.Domain
             return result;
         }
 
-        public async Task<(ValidationResultDTO Validation, bool Commited)> UpdateBlog(Guid commentId, UpdateCommentDTO criteria)
+        public async Task<(ValidationResultDTO Validation, bool Commited)> UpdateComment(Guid commentId, UpdateCommentDTO criteria)
         {
             var validationResult = await _commentValidationService.ValidateForUpdate(commentId, criteria);
 
@@ -115,6 +116,15 @@ namespace SmallBlog.Application.Services.Domain
             _unitOfWork.Commit();
 
             return (validationResult.Validation, true);
+        }
+
+        public async Task<IReadOnlyList<CommentDTO>> GetCommentsByPostId(Guid postId)
+        {
+            var data = await _unitOfWork.Comments.GetCommentsByPostId(postId);
+
+            var entity = _mapper.Map<List<CommentDTO>>(data);
+
+            return entity;
         }
     }
 }
