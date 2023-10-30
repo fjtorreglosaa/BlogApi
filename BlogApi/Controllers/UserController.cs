@@ -25,7 +25,7 @@ namespace BlogApi.Controllers
         {
             var user = new IdentityUser
             {
-                UserName = credentials.Username,
+                UserName = credentials.Email,
                 Email = credentials.Email
             };
 
@@ -45,6 +45,7 @@ namespace BlogApi.Controllers
             if (authResult.Succeeded) return await _authService.BuildToken(credentials);
 
             return BadRequest("Login Failed");
+
         }
     }
 }
