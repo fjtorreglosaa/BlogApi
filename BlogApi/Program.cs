@@ -43,7 +43,7 @@ builder.Services.AddSwaggerGen(c =>
         License = new OpenApiLicense
         {
             Name = "Repository",
-            Url = new Uri("https://github.com/fjtorreglosaa/AssessmentAranda")
+            Url = new Uri("https://github.com/fjtorreglosaa/BlogApi")
         },
     });
 
