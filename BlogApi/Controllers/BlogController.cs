@@ -67,7 +67,7 @@ namespace BlogApi.Controllers
             return Ok(result.Commited);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{blogId}")]
         public async Task<IActionResult> UpdateBlog(Guid blogId, UpdateBlogDTO data)
         {
             var result = await _blogService.UpdateBlog(blogId, data);
