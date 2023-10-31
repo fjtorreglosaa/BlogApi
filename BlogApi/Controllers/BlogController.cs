@@ -30,6 +30,17 @@ namespace BlogApi.Controllers
             return Ok(result);
         }
 
+        [HttpGet("byuser")]
+        public async Task<IActionResult> GetBlogsByUserId()
+        {
+            var emailClaim = HttpContext.User.Claims.Where(claim => claim.Type == "email").FirstOrDefault();
+            var email = emailClaim.Value;
+            var user = await _userManager.FindByEmailAsync(email);
+
+            var result = await _blogService.GetBlogsByUserId(user.Id);
+            return Ok(result);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBlogById(Guid id)
         {
